@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="assets/logo.svg">
+    </header>
+    <main>
+        <article>
+            <h1>지금 우리는 <i>카운터스펠 부산</i>을 만들어가고 있어요!</h1>
+            <p>저희의 여정에 동참해주세요!</p>
+            <a href="https://hackclub.com/slack" class="btn" target="_blank">join us</a>
+        </article>
+        <article>
+            <h1>학생들이 만든 학생들의 예제</h1>
+        </article>
+        <article>
+            <h1>핵클럽 한국은..</h1>
+            <p>Hack Club에 대해서 알아보세요!</p>
+            <a href="https://hackclub.com/philosophy/" class="btn" target="_blank">더 알아보기</a>
+        </article>
+        
+        <article>
+            <h1>contect US</h1>
+            
+            <form action="https://api.staticforms.xyz/submit" method="post">
+                <input type="hidden" name="accessKey" value="688002e6-afbf-41c0-b949-bc5d488a9c87"> <!-- Required -->
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="hidden" name="replyTo" value="rustacean@5-23.dev"> <!-- Optional -->
+                <input type="hidden" name="redirectTo" value="https://example.com/contact/success"> <!-- Optional -->
+                <input type="submit" value="Submit" />
+            </form>
+        </article>
+        
+    </main>
+    <div id="ball"></div>
+</body>
+</html>
+
+
+<script>
+const ball = document.getElementById('ball');
+let Position = {
+    x: 0,
+    y: 0
+}
+let MousePosition = {
+    x: 0,
+    y: 0
+}
+
+window.addEventListener('mousemove', (e) => {
+    MousePosition.x = e.clientX
+    MousePosition.y = e.clientY
+});
+
+setInterval(() => {
+    let angle = Math.atan((MousePosition.y-Position.y)/(MousePosition.x-Position.x))
+    let d = Math.sqrt(Math.pow(Position.x - MousePosition.x, 2) + Math.pow(Position.y - MousePosition.y, 2))
+    console.log(angle * 180 / Math.PI)
+    Position.x += (MousePosition.x-25 - Position.x) * 0.05
+    Position.y += (MousePosition.y-25 - Position.y) * 0.05
+
+    ball.style.transform = `
+        scaleX(${Math.max(2-d/100, 1.5)})
+        scaleY(${Math.max(2-d/100, 1)})
+    `
+    ball.style.top = `${Position.y}px`
+    ball.style.left = `${Position.x}px`
+    ball.style.rotate = `${angle}rad`
+})
+</script>
