@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three-globe@2.24.2/dist/three-globe.min.js"></script>
+    <script src="scripts/globe.js" defer></script>
+    <script src="scripts/ball.js" defer></script>
 </head>
 <body>
     <header>
@@ -19,11 +23,13 @@
             <a href="https://hackclub.com/slack" class="btn" target="_blank">여정에 참여하기! 🚀🚀</a>
         </article>
         <article>
-            <h1>학생들을 위한, 학생들의 모임! Hack Club Busan.</h1>
+            <h1>부산과 전세계를 잇는,</h1>
+            <h1>Hack Club Busan</h1>
+            <div id="globe-container" style="width:100%; height:400px; margin-top:20px;"></div>
         </article>
         <article>
             <h1>Hack Club 부산은...</h1>
-            <p>전 세계에 걸친 Hack Club 중, 한국의 유일한 Hack Club이에요! Hack Club에 대해서 더 자세하게 알아보세요!</p>
+            <p>100개국에 걸쳐있는 전세계의 Hack Club 중 <br>한국의 유일한 Hack Club이에요! <br>Hack Club에 대해서 더 자세하게 알아보세요!</p>
             <a href="https://hackclub.com/philosophy/" class="btn" target="_blank">더 알아보기</a>
         </article>
         
@@ -32,9 +38,10 @@
             
             <form action="https://api.staticforms.xyz/submit" method="post">
                 <input type="hidden" name="accessKey" value="688002e6-afbf-41c0-b949-bc5d488a9c87"> <!-- Required -->
-                <input type="email" name="email" placeholder="Your Email" required>
-                <input type="hidden" name="replyTo" value="rustacean@5-23.dev"> <!-- Optional -->
-                <input type="hidden" name="redirectTo" value="https://example.com/contact/success"> <!-- Optional -->
+                <input type="text" name="name" placeholder="이름 (닉네임도 괜찮아요!)" required> <!-- Optional -->
+                <input type="email" name="email" placeholder="이메일" required>
+                <input type="hidden" name="replyTo" value="hello@busan.hackclub.com"> <!-- Optional -->
+                <input type="hidden" name="redirectTo" value="https://busan.hackclub.com/#"> <!-- Optional -->
                 <input type="submit" value="Submit" />
             </form>
         </article>
@@ -43,37 +50,3 @@
     <div id="ball"></div>
 </body>
 </html>
-
-
-<script>
-const ball = document.getElementById('ball');
-let Position = {
-    x: 0,
-    y: 0
-}
-let MousePosition = {
-    x: 0,
-    y: 0
-}
-
-window.addEventListener('mousemove', (e) => {
-    MousePosition.x = e.clientX
-    MousePosition.y = e.clientY
-});
-
-setInterval(() => {
-    let angle = Math.atan((MousePosition.y-Position.y)/(MousePosition.x-Position.x))
-    let d = Math.sqrt(Math.pow(Position.x - MousePosition.x, 2) + Math.pow(Position.y - MousePosition.y, 2))
-    console.log(angle * 180 / Math.PI)
-    Position.x += (MousePosition.x-25 - Position.x) * 0.05
-    Position.y += (MousePosition.y-25 - Position.y) * 0.05
-
-    ball.style.transform = `
-        scaleX(${Math.max(2-d/100, 1.5)})
-        scaleY(${Math.max(2-d/100, 1)})
-    `
-    ball.style.top = `${Position.y}px`
-    ball.style.left = `${Position.x}px`
-    ball.style.rotate = `${angle}rad`
-})
-</script>

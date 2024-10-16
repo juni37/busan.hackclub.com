@@ -174,3 +174,26 @@ input[type=email] {
         outline: solid 1px #ebebeb;
     }
 }
+
+input[type=text] {
+    z-index: 100;
+    outline: solid 1px #ebebeb;
+    border: 0;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    color: #000;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all .5s;
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: #94227d10 0 4px 30px;
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+    &:focus {
+        outline: solid 1px #ebebeb;
+    }
+}
